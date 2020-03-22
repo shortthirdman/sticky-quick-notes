@@ -1,0 +1,32 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="'/'">Quick Sticky Notes</a>
+  <input class="form-control form-control-dark w-100" pInputText [formControl]="queryField" type="text" placeholder="Search" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <button pButton type="button" (click)="newNote = true;" label="New" icon="pi pi-check" iconPos="left"></button>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <notes-list></notes-list>
+    <notes-detail></notes-detail>
+  </div>
+</div>
+
+<p-dialog header="Note" [(visible)]="newNote" [style]="{width: '50vw'}" [modal]="true" position="center" [closeOnEscape]="false">
+  <form [formGroup]="createNoteForm">
+    <div class="form-group">
+      <label>Topic/Title</label>
+      <input pInputText type="text" class="form-control form-control-sm" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label>Note</label>
+      <textarea class="form-control form-control-sm" rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="content"></textarea>
+    </div>
+    <button pButton type="button" (click)="saveNote()" label="Save" icon="pi pi-check" iconPos="left"></button>
+  </form>
+</p-dialog>
+
+<p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>

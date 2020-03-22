@@ -1,0 +1,32 @@
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h5 class="h2">{{ note?.title }}</h5>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+          <button type="button" (click)="editNote($event, note)" class="btn btn-sm btn-outline-secondary">Edit</button>
+          <button type="button" (click)="deleteNote($event, note)" class="btn btn-sm btn-outline-secondary">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="pull-right">
+      <small class="d-block text-right mt-3">Created at : {{ note?.createdAt | amLocale:'en' | amDateFormat:'dddd, D MMMM YYYY, h:mm:ss a' }}</small>
+    </div>
+    <p>{{ note?.content }}</p>
+    <div class="pull-right" *ngIf="note?.lastUpdated">
+      <small class="d-block text-left mt-3">Last updated : {{ note?.lastUpdated | amLocale:'en' | amDateFormat:'dddd, D MMMM YYYY, h:mm:ss a' }}</small>
+    </div>
+</main>
+
+<p-dialog header="Note" [(visible)]="showUpdateNote" [style]="{width: '50vw'}" [modal]="true" position="center" [closeOnEscape]="false">
+  <form [formGroup]="editNoteForm">
+    <div class="form-group">
+      <label>Topic/Title</label>
+      <input pInputText type="text" class="form-control form-control-sm" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label>Note</label>
+      <textarea class="form-control form-control-sm" rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="content"></textarea>
+    </div>
+    <button pButton type="button" (click)="updateNote()" label="Save" icon="pi pi-check" iconPos="left"></button>
+  </form>
+</p-dialog>
