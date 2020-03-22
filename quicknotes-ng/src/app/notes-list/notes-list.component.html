@@ -1,0 +1,16 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <p-scrollPanel [style]="{width: '98%', height: '575px'}">
+        <ul class="nav flex-column">
+            <li class="nav-item" style="cursor: pointer;" *ngFor="let note of notes" (click)="selectNote($event, note)">
+              <a class="nav-link" [ngClass]="note?.isSelected ? 'active' : ''">
+                <span data-feather="home"></span>{{ note?.title }}
+              </a>
+              <div class="ml-3 text-muted font-italic font-weight-light">
+                <p class="pb-3 mb-0 small lh-125 border-bottom border-gray text-primary text-truncate">{{ note?.content }}</p>
+              </div>
+            </li>
+        </ul>
+      </p-scrollPanel>
+    </div>
+  </nav>
