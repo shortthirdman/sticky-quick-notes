@@ -12,7 +12,8 @@ import {
   ConfirmationService,
   SelectButtonModule,
   ScrollPanelModule,
-  MessageService
+  MessageService,
+  AutoCompleteModule
 } from 'primeng';
 
 @NgModule({
@@ -29,7 +30,8 @@ import {
     CardModule,
     CheckboxModule,
     ScrollPanelModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AutoCompleteModule
   ],
   providers: [ConfirmationService, MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -9,12 +9,6 @@ $fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
 @import '~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss';
 @import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss';
 
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-}
-
 .ui-scrollpanel-bar-x {
   display: none;
 }
@@ -106,4 +100,12 @@ $fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
 
 body {
   font-size: .875rem;
+}
+
+p-autocomplete {
+  width: 100% !important;
+}
+
+.title, .content {
+  width: 250px;
 }
