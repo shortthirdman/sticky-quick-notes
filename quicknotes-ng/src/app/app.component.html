@@ -1,6 +1,14 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" [routerLink]="'/'">Quick Sticky Notes</a>
-  <input class="form-control form-control-dark w-100" pInputText [formControl]="queryField" type="text" placeholder="Search" aria-label="Search">
+  <p-autoComplete styleClass="w-100" inputStyleClass="w-100" [(ngModel)]="searchText" field="title" [suggestions]="stickyNotes" type="text" placeholder="Search notes"
+    (completeMethod)="searchNotes($event)" [minLength]="1" (onSelect)="showNote()" emptyMessage="No matching text found for this search criteria">
+    <ng-template let-note pTemplate="item">
+      <div class="ui-helper-clearfix">
+        <div class="title row ml-1">{{ note?.title }}</div>
+        <div class="content row ml-1 text-truncate">{{ note?.content }}</div>
+    </div>
+    </ng-template>
+  </p-autoComplete>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <button pButton type="button" (click)="newNote = true;" label="New" icon="pi pi-check" iconPos="left"></button>

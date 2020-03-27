@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   private notes: QuickNotes = [];
   createNoteForm: FormGroup;
   newNote: boolean = false;
-  queryField: FormControl;
+  stickyNotes: any[] = [];
+  searchText: any;
 
   constructor(private appService: ApplicationService, private titleService: Title) {
     this.titleService.setTitle('Quick Sticky Notes' + ' v' + environment.version);
@@ -24,15 +25,32 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.queryField.valueChanges.subscribe(queryField => {
-      const notes = this.notes.filter(item => { item.content === queryField || item.title === queryField })
-      this.appService.setStickyNote(notes[0]);
-    });
+  }
+
+  /**
+   * @description Searchs notes
+   * @author ShortThirdMan USA Inc
+   * @param event 
+   */
+  searchNotes(event: any) {
+    let query = event.query;
+    this.stickyNotes = [];
+    for (let i = 0; i < this.notes.length; i++) {
+      let note = this.notes[i];
+      if ((note.title.toLowerCase().indexOf(query.toLowerCase()) === 0) || (note.content.toLowerCase().indexOf(query.toLowerCase()) === 0)) {
+        this.searchText = note;
+        this.stickyNotes.push(note);
+      }
+    }
+  }
+
+  showNote() {
+    this.appService.setStickyNote(this.stickyNotes[0]);
+    this.searchText = undefined || '';
   }
 
   private initializeForm() {
     this.appService.notesState.subscribe((notes) => { this.notes = notes; });
-    this.queryField = new FormControl('', Validators.minLength(1));
     this.createNoteForm = new FormGroup({
       title: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required)
